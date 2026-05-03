@@ -1,48 +1,48 @@
 
-# Android Template (Java básico)
+# Android Template (Basic Java)
 
-La idea de esta plantilla es ser liviana. Así puedes usarla como base para crear tu proyecto Android nativo en Java sin tener que configurar todo desde cero.
-version: 1.0.1
+The goal of this template is to stay lightweight, so you can use it as a base to create a native Android project in Java without configuring everything from scratch.
+_version_: 1.0.2
 
-## Cómo usar esta plantilla
+## How to use this template
 
-### 0) Requisitos 
+### 0) Requirements
 
-Para que `gradlew` funcione necesitas, como mínimo:
+For `gradlew` to work you need, at minimum:
 
-- **Java (JDK) 17**: este proyecto usa Android Gradle Plugin `8.2.0`, que requiere Java 17.
-	- Verifica: `java -version`
-	- Recomendación: Temurin/OpenJDK 17.
-	- Si usas `JAVA_HOME`, que apunte al JDK (no al JRE).
+- **Java (JDK) 17**: this project uses Android Gradle Plugin `8.2.0`, which requires Java 17.
+	- Check: `java -version`
+	- Recommendation: Temurin/OpenJDK 17.
+	- If you use `JAVA_HOME`, make sure it points to the JDK (not the JRE).
 
-- **Android SDK** (Platform + Build Tools): puedes instalarlo con Android Studio (lo más simple) o con Command-line tools.
-	- Recomendado instalar al menos:
+- **Android SDK** (Platform + Build Tools): you can install it with Android Studio (easiest) or with the command-line tools.
+	- Recommended to install at least:
 		- `platforms;android-34`
-		- `build-tools;34.0.0` (o el que tengas disponible)
+		- `build-tools;34.0.0` (or whichever version you have available)
 		- `platform-tools`
-	- Variables típicas:
-		- `ANDROID_SDK_ROOT` (o `ANDROID_HOME`)
+	- Typical environment variables:
+		- `ANDROID_SDK_ROOT` (or `ANDROID_HOME`)
 
-- **Gradle**: Es necesario que instales Gradle ya que esta plantilla no incluye el wrapper (`gradlew`). Puedes instalarlo con SDKMAN, Homebrew, o manualmente desde la web de Gradle.
-  - Recomendación: Gradle 8.2+ (compatible con AGP 8.2).
-  - Verifica: `gradle -v`
+- **Gradle**: you must install Gradle because this template does not include the wrapper (`gradlew`). You can install it with SDKMAN, Homebrew, or manually from the Gradle website.
+  - Recommendation: Gradle 8.2+ (compatible with AGP 8.2).
+  - Check: `gradle -v`
 
-Opcional (solo si vas a instalar en un dispositivo/emulador):
+Optional (only if you will install to a device/emulator):
 
-- **ADB / emulador** (viene con `platform-tools`).
+- **ADB / emulator** (comes with `platform-tools`).
 
-### 1) Bajar el repo
+### 1) Download the repo
 
-Clonas este repositorio a en la carpeta en donde deseas crear tu proyecto Android:
+Clone this repository into the folder where you want to create your Android project:
 
 ```powershell
 git clone https://github.com/yhuayhuahi/android-template-java-basic.git
 cd android-template-java-basic
 ```
 
-### 2) Desvincular la relación con el repo original
+### 2) Unlink from the original repository
 
-Para no dejar rastros del repo original, puedes eliminar la carpeta `.git` y luego inicializar un nuevo repositorio Git:
+To avoid leaving traces of the original repo, you can delete the `.git` folder and then initialize a new Git repository:
 
 ```powershell
 Remove-Item -Recurse -Force .git
@@ -50,22 +50,21 @@ git init
 git add -A
 git commit -m "Initial commit"
 git branch -M main
-git remote add origin https://github.com/TU_USUARIO/TU_REPO.git
+git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
 git push -u origin main
 ```
 
-### 3) Probar el funcionamiento de la plantilla
+### 3) Test that the template works
 
-Para comenzar a usar esta plantilla, debes ejecutar lo siguiente:
+To start using this template, run:
 
 ```powershell
 gradle wrapper
 ```
 
-Esto generará el wrapper de Gradle (`gradlew` y `gradlew.bat`) asi puedes ejecutar Gradle en proyectos Android.
+This will generate the Gradle wrapper (`gradlew` and `gradlew.bat`) so you can run Gradle in Android projects.
 
-
-Luego, para compilar y generar el APK de debug (IMPORTANTE: Para instalar en un dispositivo o emulador debes tener conectado un dispositivo o tener un emulador corriendo):
+Then, to build and generate the debug APK (IMPORTANT: to install on a device or emulator you must have a device connected or an emulator running):
 
 ```powershell
 ./gradlew assembleDebug
@@ -73,27 +72,27 @@ Luego, para compilar y generar el APK de debug (IMPORTANTE: Para instalar en un 
 ./gradlew installDebug
 ```
 
-## Cómo suele organizarse un proyecto Android nativo (Java)
+## How a native Android project is usually organized (Java)
 
-En esta sección te muestro **cómo suele organizarse un proyecto Android nativo** (Java) para que tengas un mapa mental. Luego ya pasamos a “cómo usar la plantilla”.
+In this section I show you **how a native Android project is usually organized** (Java) so you have a mental map.
 
-### 1) Cómo se organiza un proyecto Android (visión realista)
+### 1) How an Android project is structured (realistic view)
 
-Un proyecto Android con Gradle normalmente se divide en:
+An Android project with Gradle is usually split into:
 
-- **Raíz del proyecto**: configuración común, wrapper de Gradle y lista de módulos.
-- **Módulos**: `app` (aplicación) y opcionalmente módulos tipo librería (`core`, `feature-*`, `shared`, etc.).
-- **Source sets** por módulo: `src/main`, `src/test`, `src/androidTest` y a veces `src/debug`, `src/release`, `src/<flavor>`.
+- **Project root**: shared configuration, Gradle wrapper, and the list of modules.
+- **Modules**: `app` (application) and optionally library modules (`core`, `feature-*`, `shared`, etc.).
+- **Source sets** per module: `src/main`, `src/test`, `src/androidTest` and sometimes `src/debug`, `src/release`, `src/<flavor>`.
 
-#### Ejemplo de árbol (solo ilustrativo)
+#### Example tree (illustrative only)
 
 ```bash
 android-template-java-basic/
-├── app/                       # Módulo Android Application
+├── app/                       # Android Application module
 │   ├── src/
 │   │   ├── main/
 │   │   │   ├── AndroidManifest.xml
-│   │   │   ├── java/           
+│   │   │   ├── java/
 │   │   │   │   └── com/example/app/...
 │   │   │   ├── res/
 │   │   │   │   ├── layout/
@@ -103,52 +102,52 @@ android-template-java-basic/
 │   │   │   └── assets/
 │   │   ├── test/               # Unit tests (JVM)
 │   │   ├── androidTest/         # Instrumentation tests (device/emulator)
-│   │   ├── debug/              # Código/recursos solo debug (opcional)
-│   │   └── release/            # Código/recursos solo release (opcional)
-│   ├── proguard-rules.pro      # Si minificas/obfuscación (opcional)
-│   └── build.gradle            # Config del módulo app
+│   │   ├── debug/              # Debug-only code/resources (optional)
+│   │   └── release/            # Release-only code/resources (optional)
+│   ├── proguard-rules.pro      # If you minify/obfuscate (optional)
+│   └── build.gradle            # app module configuration
 │
-├── core/                       # Ejemplo: módulo Android Library (opcional)
+├── core/                       # Example: Android Library module (optional)
 │   └── ...
 │
-├── build.gradle                # Config raíz (plugins/repos comunes)
-├── settings.gradle             # Incluye módulos (app, core, ...)
+├── build.gradle                # Root config (common plugins/repos)
+├── settings.gradle             # Includes modules (app, core, ...)
 ├── gradle.properties
 ├── gradlew
 ├── gradlew.bat
 └── gradle/wrapper/
 ```
 
-### 2) `src/` y los “source sets”
+### 2) `src/` and “source sets”
 
-Dentro de un módulo, `src/` suele organizarse así:
+Inside a module, `src/` is usually organized like this:
 
-- `src/main/`: el código y recursos “base” que van siempre.
-- `src/test/`: tests unitarios (corren en JVM, sin Android runtime).
-- `src/androidTest/`: tests instrumentados (corren en emulador/dispositivo).
-- `src/debug/` y `src/release/`: overrides específicos por tipo de build.
-- `src/<flavor>/`: si usas product flavors (por ejemplo `free/`, `paid/`, `dev/`, `prod/`).
+- `src/main/`: the “base” code and resources that always ship.
+- `src/test/`: unit tests (run on the JVM, without the Android runtime).
+- `src/androidTest/`: instrumentation tests (run on an emulator/device).
+- `src/debug/` and `src/release/`: build-type-specific overrides.
+- `src/<flavor>/`: if you use product flavors (for example `free/`, `paid/`, `dev/`, `prod/`).
 
-En proyectos grandes, esto permite tener manifests/resources/código distintos por variante sin duplicar todo.
+In larger projects this enables different manifests/resources/code per variant without duplicating everything.
 
-### 3) Qué suele haber dentro de `res/` 
+### 3) What you usually find inside `res/`
 
-Un proyecto Android real casi siempre termina con más carpetas en `res/`. Las más típicas:
+A real Android project almost always ends up with more folders inside `res/`. The most common ones:
 
-- `layout/`: pantallas y componentes en XML.
-- `layout-land/`, `layout-sw600dp/`: variantes por orientación/tamaño.
+- `layout/`: screens and UI components in XML.
+- `layout-land/`, `layout-sw600dp/`: variants by orientation/screen size.
 - `values/`: `strings.xml`, `colors.xml`, `dimens.xml`, `styles.xml/themes.xml`.
-- `values-es/`, `values-en/`: localización.
-- `values-night/`: modo oscuro.
-- `drawable/`: imágenes/drawables (shape, vector, selector, etc.).
-- `drawable-night/`: drawables alternativos para night.
-- `mipmap-*`: íconos de launcher (`mipmap-mdpi`, `mipmap-xhdpi`, etc.).
-- `menu/`: menús (Toolbar/Overflow).
-- `xml/`: configuraciones varias (por ejemplo `file_paths.xml` para FileProvider, `network_security_config.xml`, etc.).
-- `raw/`: archivos “tal cual” accesibles como `R.raw.*`.
-- `font/`: fuentes.
-- `anim/` y `animator/`: animaciones.
-- `navigation/`: gráficos de navegación (si usas Navigation Component).
+- `values-es/`, `values-en/`: localization.
+- `values-night/`: dark mode.
+- `drawable/`: images/drawables (shape, vector, selector, etc.).
+- `drawable-night/`: alternate drawables for night mode.
+- `mipmap-*`: launcher icons (`mipmap-mdpi`, `mipmap-xhdpi`, etc.).
+- `menu/`: menus (Toolbar/Overflow).
+- `xml/`: miscellaneous configurations (for example `file_paths.xml` for FileProvider, `network_security_config.xml`, etc.).
+- `raw/`: “as-is” files accessible as `R.raw.*`.
+- `font/`: fonts.
+- `anim/` and `animator/`: animations.
+- `navigation/`: navigation graphs (if you use Navigation Component).
 
-Importante: Android usa **calificadores** para variantes (`-night`, `-land`, `-sw600dp`, `-es`, etc.). Eso hace que `res/` crezca en proyectos reales.
+Important: Android uses **resource qualifiers** for variants (`-night`, `-land`, `-sw600dp`, `-es`, etc.). That’s why `res/` grows in real projects.
 
