@@ -2,7 +2,7 @@
 # Android Template (Java básico)
 
 La idea de esta plantilla es ser liviana. Así puedes usarla como base para crear tu proyecto Android nativo en Java sin tener que configurar todo desde cero.
-_version_: 1.0.2
+_version_: 1.1.2
 
 ## Cómo usar esta plantilla
 
@@ -15,7 +15,7 @@ Para que `gradlew` funcione necesitas, como mínimo:
 	- Recomendación: Temurin/OpenJDK 17.
 	- Si usas `JAVA_HOME`, que apunte al JDK (no al JRE).
 
-- **Android SDK** (Platform + Build Tools): puedes instalarlo con Android Studio (lo más simple) o con Command-line tools.
+- **Android SDK**: puedes instalarlo con Android Studio (lo más simple) o con Command-line tools.
 	- Recomendado instalar al menos:
 		- `platforms;android-34`
 		- `build-tools;34.0.0` (o el que tengas disponible)
@@ -73,11 +73,11 @@ Luego, para compilar y generar el APK de debug (IMPORTANTE: Para instalar en un 
 ./gradlew installDebug
 ```
 
-## Cómo suele organizarse un proyecto Android nativo (Java)
+## Cómo suele organizarse un proyecto Android nativo
 
 En esta sección te muestro **cómo suele organizarse un proyecto Android nativo** (Java) para que tengas un mapa mental. Luego ya pasamos a “cómo usar la plantilla”.
 
-### 1) Cómo se organiza un proyecto Android (visión realista)
+### 1) Cómo se organiza un proyecto Android 
 
 Un proyecto Android con Gradle normalmente se divide en:
 
@@ -85,7 +85,7 @@ Un proyecto Android con Gradle normalmente se divide en:
 - **Módulos**: `app` (aplicación) y opcionalmente módulos tipo librería (`core`, `feature-*`, `shared`, etc.).
 - **Source sets** por módulo: `src/main`, `src/test`, `src/androidTest` y a veces `src/debug`, `src/release`, `src/<flavor>`.
 
-#### Ejemplo de árbol (solo ilustrativo)
+#### Ejemplo de árbol 
 
 ```bash
 android-template-java-basic/
@@ -102,7 +102,7 @@ android-template-java-basic/
 │   │   │   │   └── ...
 │   │   │   └── assets/
 │   │   ├── test/               # Unit tests (JVM)
-│   │   ├── androidTest/         # Instrumentation tests (device/emulator)
+│   │   ├── androidTest/        # Instrumentation tests (device/emulator)
 │   │   ├── debug/              # Código/recursos solo debug (opcional)
 │   │   └── release/            # Código/recursos solo release (opcional)
 │   ├── proguard-rules.pro      # Si minificas/obfuscación (opcional)
@@ -124,10 +124,9 @@ android-template-java-basic/
 Dentro de un módulo, `src/` suele organizarse así:
 
 - `src/main/`: el código y recursos “base” que van siempre.
-- `src/test/`: tests unitarios (corren en JVM, sin Android runtime).
-- `src/androidTest/`: tests instrumentados (corren en emulador/dispositivo).
+- `src/test/`: tests unitarios.
+- `src/androidTest/`: tests instrumentados, corren en emulador/dispositivo.
 - `src/debug/` y `src/release/`: overrides específicos por tipo de build.
-- `src/<flavor>/`: si usas product flavors (por ejemplo `free/`, `paid/`, `dev/`, `prod/`).
 
 En proyectos grandes, esto permite tener manifests/resources/código distintos por variante sin duplicar todo.
 
